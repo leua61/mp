@@ -17,5 +17,5 @@
         `${a} × ${b} = ${ans}，所以选 ${ans}。`);
     }}
   ];
-  Game.addLesson({id:'placeholder_math',title:'占位符课程',topics});
+  Game.addLesson({title:'占位符课程',topics});
 })();

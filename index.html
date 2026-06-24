@@ -49,7 +49,7 @@ function ck(it,b){uk();let v=it.o[+b.dataset.i],ok=eq(v,it.a),up=(performance.no
 function sc(id){if(A)return;C=id;localStorage[S+'c']=id;rd()}
 function rd(){let L=Game.lessons;L.some(x=>x.id==C)||(C=L[0].id,localStorage[S+'c']=C);let l=L.find(x=>x.id==C),cs=(l.topics||l.cards).map(x=>({...x,k:l.id+':'+x.id}));D.innerHTML=sel(L)+cs.map(box).join('');D.querySelectorAll('.cb').forEach(b=>b.onclick=()=>sc(b.dataset.c));let nd=[...D.querySelectorAll('.st[data-t]')];I=cs.map((c,i)=>{let it={c,el:nd[i],s:0,e:0,d:false,q:null,a:null,o:[]};it.el.querySelector('.stt').onclick=()=>st(it);pa(it);fl(it.el);return it});all()}
 function js(src){return new Promise(r=>{let s=document.createElement('script');s.src=src+'?v='+Date.now();s.onload=r;document.head.appendChild(s)})}
-window.Game={lessons:[],addLesson(x){(x.topics||x.cards||[]).forEach((t,i)=>t.id='t'+(i+1));this.lessons.push(x)},loadCourses(a){Promise.all(a.map(js)).then(rd)}};
+window.Game={lessons:[],addLesson(x){x.id||(x.id=x.title||'l'+(this.lessons.length+1));(x.topics||x.cards||[]).forEach((t,i)=>t.id||(t.id=t.title||'t'+(i+1)));this.lessons.push(x)},loadCourses(a){(async()=>{for(let s of a)await js(s);rd()})()}};
 let ag=318;requestAnimationFrame(function sp(){ag=(ag+.6)%360;document.querySelectorAll('.rg').forEach(r=>r.style.setProperty('--a',ag+'deg'));requestAnimationFrame(sp)});
 setInterval(()=>I.forEach(x=>x.s&&!x.d&&pa(x)),120);addEventListener('resize',all);js('lessons/catalog.js');
 </script></body></html>
