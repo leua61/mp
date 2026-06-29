@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>资料分析速算训练</title>
+  <script src="js/noanim.js?v=anim2"></script>
+  <link rel="stylesheet" href="css/main.css?v=anim2">
+  <link rel="stylesheet" href="b.css?v=3">
+</head>
+<body>
+  <script>localStorage.sf2c='placeholder_math'</script>
+  <div class="bg"></div>
+  <main id="d"></main>
+
+  <script src="js/state.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/templates.js"></script>
+  <script src="js/cards.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/lessons-runtime.js"></script>
+  <script src="js/boot.js?v=7"></script>
+  <script>
+    setTimeout(()=>{
+      let buttons=[...document.querySelectorAll('.sbx')];
+      let b=buttons.find(x=>x.textContent.includes('9 和 11 骨架互逆'));
+      b&&b.click();
+    },900);
+  </script>
+</body>
+</html>

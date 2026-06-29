@@ -1,0 +1,12 @@
+(function(){
+  const {n,op,R,Q,C,add,coverage,parameter}=EX;
+  const decimal=Q('three_no_decimal','小数点',['基础'],()=>{const a=n(72,96), b=n(103,119); const ans='在纯乘除内部可先忽略小数点，只看有效数字骨架';return R(`${a/10}÷${b} 这种纯乘除中，小数点应如何处理？`,ans,op(ans,['小数点永远不能动','把除号改成加号','只看单位不看数','必须算到小数后三位']),'前提是纯乘除内部。',`可以先把${a/10}看成${a}的骨架，先算结构和误差，最后结合选项回位。`,parameter());});
+  const percent=Q('three_no_percent','百分号',['基础'],()=>{const p=n(11,19); const ans='纯乘除中的百分号可先当占位符处理';return R(`A×${p}% 这类纯乘除内部，百分号可先怎样处理？`,ans,op(ans,['可先当占位符处理','直接把乘号改成加号','永远变成100','表示不能估算']),'百分号在乘除里主要影响数量级。',`先用${p}做骨架运算，再结合选项和数量级判断。`,parameter());});
+  const unit=Q('three_no_unit','单位',['基础'],()=>R('纯乘除速算中，万元、亿元这类单位通常先怎样处理？','先看有效数字和结构，单位只负责最后数量级',op('先看有效数字和结构，单位只负责最后数量级',['单位先相加','单位决定误差方向','单位必须写进每一步竖式','单位可以改变分子分母位置']),'单位不是有效数字本体。','单位、百分号、小数点在纯乘除中经常先作为占位处理，但最终要和选项数量级对齐。'),coverage());
+  const plusBoundary=Q('three_no_plus_boundary','加法边界',['基础'],()=>{const p=n(11,19); const ans=`1+${p}% = ${(1+p/100).toFixed(2).replace(/0$/,'')}`;return R(`遇到 1+${p}% 时，正确理解是什么？`,ans,op(ans,[`1+${p}% = ${p+1}`,`1+${p}% = ${p+100}`,`可以直接写成${p}1`,`无法转化`]),'有加号时不能直接三不看。',`${p}%=${(p/100).toFixed(2).replace(/0$/,'')}，所以1+${p}%=${(1+p/100).toFixed(2).replace(/0$/,'')}。`,parameter());});
+  const minusBoundary=Q('three_no_minus_boundary','减法边界',['基础'],()=>{const p=n(8,18); const ans=`1-${p}% = ${(1-p/100).toFixed(2).replace(/0$/,'')}`;return R(`遇到1-${p}%时，正确理解是什么？`,ans,op(ans,[`1-${p}%=${1-p}`,`1-${p}%=${100-p}`,`可以直接把%删掉`,`等于${p}`]),'减法里的百分号不是占位符。',`${p}%=${(p/100).toFixed(2).replace(/0$/,'')}，所以1-${p}%=${(1-p/100).toFixed(2).replace(/0$/,'')}。`,parameter());});
+  const backScale=Q('three_no_back_scale','回位意识',['运用'],()=>R('三不看之后，最后为什么还要结合选项回位？','因为小数点、百分号、单位会影响数量级',op('因为小数点、百分号、单位会影响数量级',['因为答案一定最大','因为选项没有意义','因为误差方向会消失','因为题目变成加法']),'先不看不等于永远不看。','三不看只是先抓骨架；最后仍要根据选项、单位、百分号决定答案数量级。'),coverage());
+  const can=C('three_no_can_module','可先不看',['基础'],[decimal,percent,unit],'all',coverage({progressScope:'node_children',progressLabel:'局部掌握'}));
+  const cannot=C('three_no_cannot_module','不可乱看',['基础'],[plusBoundary,minusBoundary],'sequence',coverage({progressScope:'node_children',progressLabel:'局部掌握'}));
+  add(C('three_no_look_card','三不看原则｜可不看、不可不看与回位',['基础'],[can,cannot,backScale],'sequence',coverage({routeSchema:'recursive_route_tree_v1',routeDepth:'3',progressScope:'card_children',progressLabel:'题卡掌握',localProgressLabel:'局部掌握'})));
+})();

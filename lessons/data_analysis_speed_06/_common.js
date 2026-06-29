@@ -1,0 +1,20 @@
+(function(){
+  const pk=a=>a[Math.floor(Math.random()*a.length)];
+  const n=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+  const uq=a=>[...new Set(a)];
+  const sh=a=>a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]);
+  const op=(a,b,l=4)=>sh([a,...sh(uq(b).filter(x=>x!==a)).slice(0,l-1)]);
+  const R=(q,a,pool,hint,solution,extra={})=>Object.assign({q,a,pool,hint,solution},extra);
+  const pct=(x,d=1)=>`${(Math.round(x*Math.pow(10,d))/Math.pow(10,d)).toFixed(d)}%`;
+  const sPct=(x,d=1)=>`${x>=0?'+':''}${pct(x,d)}`;
+  const yuan=x=>String(Math.round(x));
+  const near=(x,d=0)=>Number(x.toFixed(d));
+  const cid='data_analysis_growth_ratio_06';
+  const Q=(id,title,tags,mk,type)=>({id,title,t:title,type:type||tags[0],tags,mk,makeQuestion:mk});
+  const C=(id,title,tags,subs,unlockMode='all')=>({id,title,t:title,type:tags[0],tags,unlockMode,subs});
+  const sec=title=>Game.addLessonTopic(cid,{k:'s',t:title});
+  const add=t=>Game.addLessonTopic(cid,t);
+  const done=title=>Game.finishLesson(cid,title);
+  Game.beginLesson(cid);
+  window.EX={pk,n,uq,sh,op,R,Q,C,sec,add,done,pct,sPct,yuan,near};
+})();

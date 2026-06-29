@@ -1,0 +1,22 @@
+(function(){
+const pk=a=>a[Math.random()*a.length|0],n=(a,b)=>a+(Math.random()*(b-a+1)|0);
+const R=(q,a,pool,hint,solution,ex={})=>Object.assign({q,a,pool,hint,solution},ex);
+const uq=a=>[...new Set(a)],sh=a=>a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]);
+const o=(ans,arr,lim=5)=>sh([ans,...sh(uq(arr).filter(x=>x!==ans)).slice(0,lim-1)]);
+const nr=(a,b,av=[])=>{let x;do{x=n(a,b)}while(av.includes(x));return x};
+const cl=s=>String(s).replace(/0+$/,'').replace(/\.$/,'');
+const rs=(x,d=3)=>cl((Math.round(x*10**d)/10**d).toFixed(d));
+const ds=(x,d=3)=>cl((Math.round(x*10**d)/10**d).toFixed(d));
+const gcd=(a,b)=>{a=Math.abs(a);b=Math.abs(b);while(b){let t=a%b;a=b;b=t}return a||1};
+const sm=(a,b)=>{const g=gcd(a,b);return `${a/g}/${b/g}`};
+const f3=x=>{const d=String(Math.round(Math.abs(x))).replace(/\D/g,'');return d.length>=3?d.slice(0,3):d.padEnd(3,'0')};
+const fs=t=>Number((Number(t)/100).toFixed(1));
+const fc=v=>v>=100?String(Math.round(v)):v>=10?rs(v,1):v>=1?rs(v,2):rs(v,3);
+const f7={1:'0.142857',2:'0.285714',3:'0.428571',4:'0.571428',5:'0.714285',6:'0.857142'};
+const bf=[['1/2','0.5','二分之一就是一半。','1 ÷ 2 = 0.5。'],['1/3','0.333','三分之一是循环小数 0.333…。','1 ÷ 3 = 0.333…。'],['1/4','0.25','四分之一就是 25%。','1 ÷ 4 = 0.25。'],['1/5','0.2','五分之一就是 20%。','1 ÷ 5 = 0.2。'],['1/6','0.167','六分之一约等于 0.167。','1 ÷ 6 = 0.1666…，保留三位约 0.167。'],['1/7','0.142857','七分之一要记住循环节 142857。','1/7 = 0.142857…'],['1/8','0.125','八分之一是常用精确值。','1 ÷ 8 = 0.125。'],['1/9','0.111','九分之一是 1 循环。','1 ÷ 9 = 0.111…。'],['1/10','0.1','十分之一就是小数点左移一位。','1 ÷ 10 = 0.1。'],['1/11','0.09','十一分之一约看成 0.09。','1 ÷ 11 = 0.0909…，资料分析骨架可记 09。']];
+const q=(id,title,tags,mk,type)=>({id,title,t:title,tags,type:type||tags,makeQuestion:mk,mk});
+const c=(id,title,subs,mode)=>{const x={id,title,t:title,type:'同卡子级别',tags:'同卡子级别',subs};if(mode==='sequence')x.levelType=x.unlockMode=mode;return x};
+const add=x=>Game.addLessonTopic('data_analysis_speed_01',x),sec=t=>add({k:'s',t});
+Game.beginLesson('data_analysis_speed_01','资料分析速算 01');
+window.DA={pk,n,R,uq,sh,o,nr,cl,rs,ds,sm,f3,fs,fc,f7,bf,q,c,add,sec,done:()=>Game.finishLesson('data_analysis_speed_01',{title:'资料分析速算 01'})};
+})();
