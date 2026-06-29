@@ -1,0 +1,32 @@
+(function(){
+  Game.ctl={
+    selectorGroups:[
+      {title:'资料分析',items:[
+        {id:'data_analysis_speed_01',no:'1'},
+        {id:'data_analysis_speed_02',no:'2'},
+        {id:'data_analysis_speed_03',no:'3'},
+        {id:'data_analysis_speed_04',no:'4'},
+        {id:'data_analysis_speed_05',no:'5'},
+        {id:'data_analysis_speed_06',no:'6'},
+        {id:'data_analysis_speed_07',no:'7'},
+        {id:'data_analysis_speed_07_EX',no:'7_EX'},
+        {id:'data_analysis_speed_08',no:'8'},
+        {id:'data_analysis_speed_09',no:'9'},
+        {id:'data_analysis_speed_10',no:'10'},
+        {id:'data_analysis_speed_10_EX',no:'10_EX'},
+        {id:'data_analysis_speed_11',no:'11'},
+        {id:'data_analysis_speed_11_EX',no:'11_EX'}
+      ]}
+    ],
+    folders:[
+      'placeholder_math'
+    ]
+  };
+})();
+;(function(){
+  window.Game=window.Game||{};
+  Game.ctl=Game.ctl||{};
+  Game.ctl.lessonBundleFiles=[
+    "lesson_bundle.js"
+  ];
+})();
