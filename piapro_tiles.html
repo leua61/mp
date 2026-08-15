@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Piapro 代表色贴纸序列 v4 - clean</title>
+<script src="js/piapro_boxes.js?v=1"></script>
+<style>
+  :root {
+    --miku: 57, 197, 187;
+    --rin: 255, 165, 0;
+    --len: 255, 226, 17;
+    --luka: 255, 192, 203;
+    --meiko: 216, 0, 0;
+    --kaito: 0, 0, 255;
+
+    --tile-w: 40px;
+    --tile-h: 20px;
+    --period: 480px;
+    --speed: 72s;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    background: #202020;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .wrap {
+    width: min(925px, 100vw);
+  }
+
+  .scene {
+    position: relative;
+    width: 925px;
+    height: 160px;
+    max-width: 100%;
+    overflow: hidden;
+    background: #202020;
+  }
+
+  .stage {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    clip-path: polygon(20% 0, 76% 0, 100% 100%, 0 100%);
+    background:
+      linear-gradient(118deg, transparent 0 30%, rgba(255,255,255,.12) 30% 39%, transparent 39% 100%),
+      linear-gradient(90deg,
+        rgba(255,255,255,.045) 0 15%,
+        transparent 15% 27%,
+        rgba(0,0,0,.075) 27% 42%,
+        transparent 42% 55%,
+        rgba(0,0,0,.085) 55% 65%,
+        transparent 65% 100%
+      ),
+      linear-gradient(90deg, #16c7de 0%, #32c8cf 48%, #12bad0 100%);
+  }
+
+  .stage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 12% 72%, rgba(255,255,255,.34), rgba(255,255,255,0) 14%),
+      linear-gradient(90deg, transparent 0 65%, rgba(0,0,0,.08) 65% 72%, transparent 72%),
+      linear-gradient(180deg, rgba(255,255,255,.06) 0 18%, transparent 18%);
+  }
+
+  .dots {
+    position: absolute;
+    width: 150px;
+    height: 110px;
+    opacity: .42;
+    pointer-events: none;
+    background-image: radial-gradient(rgba(255,255,255,.45) 1.2px, transparent 1.2px);
+    background-size: 7px 7px;
+  }
+
+  .dots.left  { left: 145px; top: 4px; }
+  .dots.right { right: 132px; top: 13px; }
+
+  .window {
+    position: absolute;
+    left: 565px;
+    top: 0;
+    width: 136px;
+    height: 105px;
+    opacity: .23;
+    border-left: 3px solid #04788d;
+    border-right: 3px solid #04788d;
+    background:
+      linear-gradient(90deg, transparent 49%, #04788d 49% 51%, transparent 51%),
+      linear-gradient(180deg, transparent 46%, #04788d 46% 49%, transparent 49%);
+  }
+
+  .window::before,
+  .window::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform-origin: 50% 100%;
+    border-top: 3px solid #04788d;
+  }
+
+  .window::before { transform: skewX(-24deg); }
+  .window::after  { transform: skewX(24deg); }
+
+  .shard {
+    position: absolute;
+    z-index: 3;
+    background: rgba(255,255,255,.92);
+    transform: rotate(var(--r));
+  }
+
+  .s1 { left: 194px; top: 47px; width: 15px; height: 17px; --r: 16deg; }
+  .s2 { left: 372px; top: 70px; width: 24px; height: 13px; --r: 17deg; }
+  .s3 { left: 417px; top: 60px; width: 48px; height: 10px; --r: 63deg; }
+  .s4 { left: 390px; top: 106px; width: 20px; height: 16px; --r: 22deg; }
+  .s5 { left: 292px; top: -10px; width: 48px; height: 16px; --r: 25deg; background: rgba(255,192,203,.72); }
+
+  .sequence {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    overflow: hidden;
+  }
+
+  .track {
+    position: absolute;
+    left: 88px;
+    top: 0;
+    height: 160px;
+    width: max-content;
+    display: flex;
+    animation: move var(--speed) linear infinite;
+    will-change: transform;
+  }
+
+  @keyframes move {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(calc(-1 * var(--period)), 0, 0); }
+  }
+
+  .period {
+    position: relative;
+    width: var(--period);
+    height: 160px;
+    flex: 0 0 var(--period);
+  }
+
+  .box {
+    position: absolute;
+  }
+
+  .note {
+    margin: 10px 0 0;
+    color: rgba(255,255,255,.68);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .track { animation: none; }
+  }
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="scene" aria-label="Piapro 代表色移动贴纸序列">
+      <div class="stage">
+        <div class="dots left"></div>
+        <div class="dots right"></div>
+        <div class="window"></div>
+
+        <i class="shard s1"></i>
+        <i class="shard s2"></i>
+        <i class="shard s3"></i>
+        <i class="shard s4"></i>
+        <i class="shard s5"></i>
+
+        <div class="sequence">
+          <div class="track" id="track"></div>
+        </div>
+      </div>
+    </div>
+    <p class="note">v4：彩色块全部是纯半透明矩形；空心框只有白色描边，中间完全透明；无条纹、无点阵、无填充。</p>
+  </main>
+
+<script>
+  const boxTypes = Object.freeze(Object.fromEntries(
+    Object.entries(window.PiaproBoxes.types).map(([k,v])=>[k,`box ${v}`])
+  ));
+
+  const pattern = [
+    ["miku",  166, 55],
+    ["meiko", 226, 55],
+    ["kaito", 406, 55],
+    ["kaito", 226, 93],
+    ["meiko", 406, 93],
+    ["rin",   466, 93],
+    ["slot", -14, 133],
+    ["slot",  47, 133],
+    ["slot", 106, 133],
+    ["slot", 166, 133],
+    ["slot", 286, 133],
+    ["slot", 346, 133],
+    ["slot", 466, 133],
+    ["slot", 526, 133],
+    ["slot", 586, 133],
+    ["slot", 646, 133],
+    ["len",  226, 133],
+    ["luka", 406, 133],
+  ];
+
+  const track = document.getElementById("track");
+
+  function createBox(type, x, y) {
+    const el = document.createElement("span");
+    el.className = boxTypes[type];
+    el.dataset.boxType = type;
+    el.style.left = `${x}px`;
+    el.style.top = `${y}px`;
+    return el;
+  }
+
+  window.piaproBoxes = Object.freeze({ types: boxTypes, create: createBox, shared: window.PiaproBoxes });
+
+  function createPeriod() {
+    const period = document.createElement("div");
+    period.className = "period";
+
+    for (const args of pattern) period.appendChild(createBox(...args));
+
+    return period;
+  }
+
+  for (let i = 0; i < 5; i++) {
+    track.appendChild(createPeriod());
+  }
+</script>
+</body>
+</html>

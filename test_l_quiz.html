@@ -1,0 +1,13 @@
+<!doctype html><meta charset="utf-8"><body><main id="host"><div id="cs"></div></main>
+<script>window.Game={addLesson:x=>window.lesson=x};window.PF=false;</script>
+<script src="lessons/idiom_world/_data.js"></script>
+<script src="lessons/idiom_world/data_20260806_seq_10.js"></script>
+<script src="lessons/idiom_world/_view.js"></script>
+<script src="lessons/idiom_world/idiom_world.js"></script>
+<script>
+const q=lesson.topics[0].makeQuestion();
+const state={v:6,active:'yi_si_bu_gou',hand:['yi_si_bu_gou','yi_ju_liang_de','yi_yi_guan_zhi'],bag:[],cards:{yi_si_bu_gou:{chars:[],core:0,seen:1,err:0}}};
+const api={el:document.querySelector('#host'),cs:document.querySelector('#cs'),pf:false,getState:()=>state,setState:()=>{},setProgress:()=>{},setQ:()=>{},setC:x=>document.querySelector('#cs').innerHTML=x,setBtn:()=>{},setFb:()=>{}};
+q.mount(api);
+setTimeout(()=>{const t=document.body.innerText;document.body.dataset.ok=t.includes('选择这个成语的整体意思')&&!t.includes('先看结构')&&t.includes('形容做事认真细致，一点儿也不马虎。')?'1':'0'},50);
+</script>

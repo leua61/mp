@@ -1,0 +1,24 @@
+<!doctype html><meta charset="utf-8"><body>
+<div id="l"><div class="cs"></div></div>
+<div id="o"><div class="cs"></div></div>
+<div id="e"><div class="cs"></div></div>
+<script>window.Game={addLesson:x=>window.lesson=x};window.PF=false;</script>
+<script src="lessons/idiom_world/_data.js"></script>
+<script src="lessons/idiom_world/data_20260806_seq_10.js"></script>
+<script src="lessons/idiom_world/_quality.js"></script>
+<script src="lessons/idiom_world/_view.js"></script>
+<script src="lessons/idiom_world/idiom_world.js"></script>
+<script>
+const mount=(host,id,hand)=>{
+  const q=lesson.topics[0].makeQuestion(),el=document.querySelector(host),cs=el.querySelector('.cs');
+  const state={v:6,active:id,hand,bag:[],cards:{[id]:{chars:[],core:0,seen:1,err:0}}};
+  const api={el,cs,pf:false,getState:()=>state,setState:()=>{},setProgress:()=>{},setQ:()=>{},setC:x=>cs.innerHTML=x,setBtn:()=>{},setFb:()=>{}};
+  q.mount(api);return cs.innerText;
+};
+const lt=mount('#l','yi_si_bu_gou',['yi_si_bu_gou','yi_ju_liang_de','yi_yi_guan_zhi']);
+const ot=mount('#o','qu_tu_xi_xin',['qu_tu_xi_xin','gao_shan_yang_zhi','ji_qu_ao_ya']);
+const et=mount('#e','gao_shan_yang_zhi',['gao_shan_yang_zhi','qu_tu_xi_xin','ji_qu_ao_ya']);
+const ok=lt.includes('选择这个成语的整体意思')&&!lt.includes('词组提示')&&!lt.includes('逐字解锁')&&ot.includes('词组提示')&&ot.includes('弄弯烟囱')&&ot.includes('搬远柴草')&&!ot.includes('逐字解锁')&&et.includes('逐字解锁')&&et.includes('选择一个尚未解开的字');
+document.body.dataset.ok=ok?'1':'0';
+</script>
+</body>

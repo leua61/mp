@@ -1,0 +1,29 @@
+问题原因
+========
+PUBLISH_BUNDLED_PAGES.bat 会在临时发布目录中创建 gh-pages 分支，而项目根目录没有 gh-pages 分支。
+所以在项目根目录执行 git push origin gh-pages 会出现：
+error: src refspec gh-pages does not match any
+这不是登录错误。
+
+修正版用法
+==========
+1. 正常发布：双击 PUBLISH_BUNDLED_PAGES.bat
+2. 如果只因网络断开而失败：网络恢复后双击 RETRY_GH_PAGES_PUSH.bat
+3. 不要在项目根目录手工执行 git push origin gh-pages
+
+原失败现场立即续推
+==================
+在项目根目录打开 PowerShell，执行：
+
+$deploy = Get-ChildItem -Force -Directory .pages_deploy_* | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+$deploy.FullName
+Set-Location $deploy.FullName
+git push --force --set-upstream origin gh-pages
+
+若第一条找不到任何目录，直接使用修正版 PUBLISH_BUNDLED_PAGES.bat 重新构建并发布。
+
+如何区分错误
+============
+Connection was reset：网络到 GitHub 被重置，不是未登录。
+Authentication failed / Permission denied：才是登录或仓库权限问题。
+Git Credential Manager 弹出浏览器时，按提示登录 GitHub 即可；GitHub HTTPS 不接受账号密码直接推送。
